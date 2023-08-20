@@ -1,13 +1,10 @@
-#include <unistd.h>
-#include <stdarg.h>
-#include <limits.h>
-#include <stdio.h>
+#include "main.h"
 
 int _putchar(char c) {
     return (write(1, &c, 1));
 }
 
-int _print(const char* format, ...) {
+int _printf(const char *format, ...);{
 
     va_list args;
     int charsPrinted = 0;
@@ -54,7 +51,7 @@ int _print(const char* format, ...) {
                 format++;
             }
     }
-
+    va_end(args);
 
     return charsPrinted;
 }
