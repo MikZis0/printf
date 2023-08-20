@@ -15,7 +15,7 @@ int _print(const char* format, ...) {
 
     // printf('Hello world, %c %s"", 'a', "string")
 
-    while(*format != '%0') {
+    while(*format != '/0') {
             if (*format == '%') {
                     // increment the pointer first
                     format++;
