@@ -12,7 +12,7 @@ int _printf(const char *format, ...);{
 
     // printf('Hello world, %c %s"", 'a', "string")
 
-    while(*format != '/0') {
+    while(*format != '\0') {
             if (*format == '%') {
                     // increment the pointer first
                     format++;
@@ -22,31 +22,44 @@ int _printf(const char *format, ...);{
                              int c = va_arg(args, int);
                             _putchar(c);
                             charsPrinted++;
-                            format++;
+                           // format++;
                         }
 
                         break;
                     case 's':
                         {
                             char *str = va_arg(args, char*);
-                            while(*str != "\0") {
-                                charsPrinted++;
+                            while(*str != '\0') {
                                 _putchar(*str);
+				charsPrinted++;
                                 str++;
                             }
-                            format++;
+
+			 //break;
+	             
+                           // format++;
                         }
 
                         break;
-                    default:
-                        _putchar(*format);
-                        charsPrinted++;
+		     case '%':
+			{
+				int p = va_arg(args, int);
+				_putchar(p);
+				charsPrinted++;
+
+			}
+			break;
+                    //default:
+                      //  _putchar(*format);
+                       // charsPrinted++;
                     }
 
+
             }else {
-                charsPrinted++;
+		     _putchar(*format);
+                     charsPrinted++;
                 // print char to std out
-                _putchar(*format); // What if this errors out
+                //_putchar(*format); // What if this errors out
                 // increment pointer
                 format++;
             }
