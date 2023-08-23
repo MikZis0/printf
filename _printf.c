@@ -1,70 +1,52 @@
 #include "main.h"
 
-int _putchar(char c) {
-    return (write(1, &c, 1));
-}
+int _printf(const char *format, ...)
+{
+	int charsPrinted = 0;
+	va_list args;
+	va_start(args, format);
 
-int _printf(const char *format, ...);{
-
-    va_list args;
-    int charsPrinted = 0;
-    va_start(args, format);
-
-    // printf('Hello world, %c %s"", 'a', "string")
-
-    while(*format != '\0') {
-            if (*format == '%') {
-                    // increment the pointer first
-                    format++;
-                    switch(*format) {
-                    case 'c':
-                        {
-                             int c = va_arg(args, int);
-                            _putchar(c);
-                            charsPrinted++;
-                           // format++;
-                        }
-
-                        break;
-                    case 's':
-                        {
-                            char *str = va_arg(args, char*);
-                            while(*str != '\0') {
-                                _putchar(*str);
-				charsPrinted++;
-                                str++;
-                            }
-
-			 //break;
-	             
-                           // format++;
-                        }
-
-                        break;
-		     case '%':
+	while (*format != '\0')
+	{
+		if (*format == '%')
+		{
+			format++;
+			switch (*format)
 			{
-				int p = va_arg(args, int);
-				_putchar(p);
-				charsPrinted++;
-
+				case 'c':
+					{
+						int c = va_arg(args, int);
+						putchar(c);
+						charsPrinted++;
+					}
+					break;
+				case 's':
+					{
+						char *str = va_arg(args, char*);
+						while (*str != '\0')
+						{
+							putchar(*str);
+							str++;
+							charsPrinted++;
+						}
+					}
+					break;
+				case '%':
+					{
+						int p = va_arg(args, int);
+						putchar(p);
+						charsPrinted++;
+					}
+					break;
 			}
-			break;
-                    //default:
-                      //  _putchar(*format);
-                       // charsPrinted++;
-                    }
-
-
-            }else {
-		     _putchar(*format);
-                     charsPrinted++;
-                // print char to std out
-                //_putchar(*format); // What if this errors out
-                // increment pointer
-                format++;
-            }
-    }
-    va_end(args);
-
-    return charsPrinted;
+		}
+		else
+		{
+			putchar(*format);
+			charsPrinted++;
+		}
+		format++;
+	}
+	va_end(args);
+	return (charsPrinted);
 }
